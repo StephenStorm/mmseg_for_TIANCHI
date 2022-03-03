@@ -254,6 +254,11 @@ def isaid_palette():
             [0, 0, 191], [0, 0, 255], [0, 191, 127], [0, 127, 191],
             [0, 127, 255], [0, 100, 155]]
 
+def drive_palette():
+    return [[120, 120, 120], [6, 230, 230]]
+
+def tianchi_palette():
+    return [[0, 0, 0], [255, 255, 255]]
 
 dataset_aliases = {
     'cityscapes': ['cityscapes'],
@@ -267,7 +272,9 @@ dataset_aliases = {
         'coco-stuff10k', 'coco-stuff164k', 'coco_stuff', 'coco_stuff10k',
         'coco_stuff164k'
     ],
-    'isaid': ['isaid', 'iSAID']
+    'isaid': ['isaid', 'iSAID'],
+    'drive': ['drive'],
+    'tianchi': ['tianchi']
 }
 
 

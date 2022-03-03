@@ -14,7 +14,7 @@ def main():
         '--device', default='cuda:0', help='Device used for inference')
     parser.add_argument(
         '--palette',
-        default='cityscapes',
+        default='tianchi',
         help='Color palette used for segmentation map')
     parser.add_argument(
         '--opacity',
@@ -27,6 +27,7 @@ def main():
     model = init_segmentor(args.config, args.checkpoint, device=args.device)
     # test a single image
     result = inference_segmentor(model, args.img)
+
     # show the results
     show_result_pyplot(
         model,

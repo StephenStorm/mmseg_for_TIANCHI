@@ -1,10 +1,15 @@
 _base_ = [
-    '../_base_/models/segformer_mit-b0.py', '../_base_/datasets/tianchi.py',
+    '../_base_/models/segformer_mit-b0.py',
+    '../_base_/datasets/tianchi.py',
     '../_base_/default_runtime.py', '../_base_/schedules/schedule_my.py'
 ]
 
 model = dict(
-    pretrained='pretrain/mit_b0.pth', decode_head=dict(num_classes=150))
+    backbone=dict(
+        init_cfg=dict(type='Pretrained', checkpoint='pretrain/conv_mit_b0.pth')),
+    decode_head=dict(
+        num_classes=2),
+    test_cfg=dict(mode='slide', crop_size=(1024, 1024), stride=(768, 768)))
 
 # optimizer
 optimizer = dict(
