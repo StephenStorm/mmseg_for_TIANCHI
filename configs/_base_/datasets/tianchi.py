@@ -50,7 +50,7 @@ data = dict(
     test=dict(
         type=dataset_type,
         data_root=data_root,
-        img_dir='images/validation',  # 测试图像路径
-        ann_dir='annotations/validation',  # 测试mask路径
+        img_dir='test/img',  # 测试图像路径
+        ann_dir=None,  # 测试mask路径
         pipeline=test_pipeline)
 )

@@ -4,8 +4,8 @@ import cv2
 from tqdm import tqdm
 import os
 
-config_file = "work_dirs/segformer_mit-b5_768x768_160k_tianchi_aug/segformer_mit-b5_768x768_160k_tianchi_aug.py"
-checkpoint_file = 'work_dirs/segformer_mit-b5_768x768_160k_tianchi_aug/iter_40000.pth'
+config_file = "configs/segformer/segformer_mit-b5_1024x1024_40k_tianchi_aug.py"
+checkpoint_file = 'work_dirs/segformer_mit-b5_1024x1024_40k_tianchi_aug/iter_8000.pth'
 model = init_segmentor(config_file, checkpoint_file, device='cuda:0')
 
 # mode = 'bytedance'
@@ -27,4 +27,4 @@ for img_name in tqdm(test_img_list):
     else:
         result = result[0]
         result[:, :] = result[:, :] * 255
-        cv2.imwrite("data/tianchi_aug/test/images/"+img_name[:-4] + ".png", result)
+        cv2.imwrite("data/test_res_dir/images/"+img_name[:-4] + ".png", result)
