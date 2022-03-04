@@ -1,7 +1,7 @@
 _base_ = [
     '../_base_/datasets/tianchi.py',
     '../_base_/default_runtime.py',
-    '../_base_/schedules/schedule_40k.py'
+    '../_base_/schedules/schedule_my.py'
 ]
 
 # model settings
@@ -34,7 +34,7 @@ model = dict(
         norm_cfg=norm_cfg,
         align_corners=False,
         loss_decode=dict(
-            type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0)),
+            type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0, class_weight= [1.0, 3.0])),
     # model training and testing settings
     train_cfg=dict(),
     test_cfg=dict(mode='whole'))
@@ -57,7 +57,7 @@ lr_config = dict(
     _delete_=True,
     policy='poly',
     warmup='linear',
-    warmup_iters=1000,
+    warmup_iters=1500,
     warmup_ratio=1e-6,
     power=1.0,
     min_lr=0.0,
