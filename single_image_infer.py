@@ -4,9 +4,9 @@ import cv2
 from tqdm import tqdm
 import os
 
-config_file = "configs/segformer/segformer_mit-b5_1024x1024_40k_tianchi_aug.py"
-checkpoint_file = 'work_dirs/segformer_mit-b5_1024x1024_40k_tianchi_aug/iter_8000.pth'
-model = init_segmentor(config_file, checkpoint_file, device='cuda:0')
+config_file = "configs/segformer/segformer_mit-b5_1024x1024_40k_tianchi_aug_class_weight1_3.py"
+checkpoint_file = 'work_dirs/segformer_mit-b5_1024x1024_40k_tianchi_aug_class_weight1_3/iter_12000.pth'
+model = init_segmentor(config_file, checkpoint_file, device='cuda:4')
 
 # mode = 'bytedance'
 mode = 'submit'
