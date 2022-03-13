@@ -1,5 +1,5 @@
 _base_ = [
-    '../_base_/datasets/tianchi_Aug.py',
+    '../_base_/datasets/tianchi_randomshiftmove.py',
     '../_base_/default_runtime.py',
     '../_base_/schedules/schedule_my.py'
 ]
@@ -64,4 +64,4 @@ lr_config = dict(
     min_lr=0.0,
     by_epoch=False)
 
-data = dict(samples_per_gpu=24, workers_per_gpu=2)
+data = dict(samples_per_gpu=8, workers_per_gpu=2)

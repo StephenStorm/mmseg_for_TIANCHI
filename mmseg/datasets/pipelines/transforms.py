@@ -9,6 +9,81 @@ from numpy import random
 from ..builder import PIPELINES
 
 
+from mmseg.datasets.pipelines.transforms_util import RandomShiftRemove as RSR
+
+'''
+results 内容
+
+{
+    'img_info': {'filename': '714.jpg', 'ann': {'seg_map': '714.png'}}, 
+    'ann_info': {'seg_map': '714.png'}, 
+    'seg_fields': ['gt_semantic_seg'], 
+    'img_prefix': 'data/tianchi_aug/images/training', 
+    'seg_prefix': 'data/tianchi_aug/annotations/training', 
+    'filename': 'data/tianchi_aug/images/training/714.jpg', 
+    'ori_filename': '714.jpg'
+    'img': array
+    'img_shape': (512, 512, 3), 
+    'ori_shape': (1536, 1536, 3), 
+    'pad_shape': (630, 630, 3), 
+    'scale_factor': array([0.41015625, 0.41015625, 0.41015625, 0.41015625], dtype=float32), 
+    'img_norm_cfg': {'mean': array([0., 0., 0.], dtype=float32), 'std': array([1., 1., 1.], dtype=float32), 
+    'to_rgb': False}, 
+    'gt_semantic_seg':  array,
+    'scale': (630, 630), 
+    'scale_idx': None, 
+    'keep_ratio': True
+}
+
+
+
+'''
+
+# stephen add 
+
+@PIPELINES.register_module()
+class RandomShiftRemove(object):
+    def __init__(self, prob=0.5) -> None:
+        self.prob = prob
+        if prob is not None:
+            assert prob >= 0 and prob <= 1
+
+
+    def __call__(self, results) :
+        '''
+        Args:
+            results (dict): Result dict from loading pipeline.
+
+        Returns:
+            dict: Resized results, 'img_shape', 'pad_shape' keys are updated.
+        '''
+        if 'RandomShiftRemove' not in results:
+            RandomShiftRemove = True if np.random.rand() < self.prob else False
+            results['RandomShiftRemove'] = RandomShiftRemove
+       
+        if results['RandomShiftRemove']:
+
+
+            file_path = results['filename']
+
+            img = results['img']
+            mask = results['gt_semantic_seg']
+            img_t, mask_t = RSR(results['img_prefix'], file_path, img, mask = mask.copy())
+            results['img'] = img_t
+            results['gt_semantic_seg'] = mask_t
+            results['RandomRemove'] = True
+        return results
+    
+    def __repr__(self):
+        repr_str = self.__class__.__name__
+        
+        return repr_str
+
+
+        
+
+        
+
 @PIPELINES.register_module()
 class ResizeToMultiple(object):
     """Resize images & seg to multiple of divisor.
@@ -330,6 +405,7 @@ class RandomFlip(object):
             dict: Flipped results, 'flip', 'flip_direction' keys are added into
                 result dict.
         """
+        # print(results)
 
         if 'flip' not in results:
             flip = True if np.random.rand() < self.prob else False
