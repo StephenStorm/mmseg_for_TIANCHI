@@ -5,7 +5,7 @@ from tqdm import tqdm
 import os
 
 config_file = "/opt/tiger/workspace/mmsegmentation/configs/segformer/segformer_mit-b5_1024x1024_40k_tianchi_aug_class_weight1_3_mosaic.py"
-checkpoint_file = '/opt/tiger/workspace/mmsegmentation/work_dirs/segformer_mit-b5_1024x1024_40k_tianchi_aug_class_weight1_3_mosaic/iter_46000.pth'
+checkpoint_file = '/opt/tiger/workspace/mmsegmentation/work_dirs/segformer_mit-b5_1024x1024_40k_tianchi_aug_class_weight1_3_mosaic/iter_24000.pth'
 model = init_segmentor(config_file, checkpoint_file, device='cuda:4')
 
 # mode = 'bytedance'
