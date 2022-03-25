@@ -16,4 +16,4 @@ python3 tools/test.py configs/segformer/segformer_mit-b5_1024x1024_40k_tianchi_a
 
 ./tools
 
-./tools/dist_train.sh  configs/segformer/segformer_mit-b5_1024x1024_40k_tianchi_aug_class_weight1_3_Aug.py 4 
+CUDA_VISIBLE_DEVICES=2,3,4,5,6,7 ./tools/dist_train.sh configs/segformer/segformer_mit-b5_1024x1024_40k_tianchi_aug_class_weight1_3.py 6 

@@ -4,16 +4,16 @@ dataset_type = 'TianchiDataset'  # 上一步中你定义的数据集的名字
 data_root = '/opt/tiger/workspace/tianchi2022/data/new_tianchi_data'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)  # 数据集的均值和标准差，空引用默认的，也可以网上搜代码计算
-crop_size = (768, 768)  # 数据增强时裁剪的大小
-img_scale = (768, 768)
+img_scale = (1024, 1024)  # 数据增强时裁剪的大小
+crop_size = (768, 768)
 train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations'),
     # dict(type='LoadAnnotationsTianchi'),
     dict(type='Resize', img_scale=img_scale,
-         ratio_range=(1.0, 1.0)),
-        #  ratio_range=(0.5, 2.0)),  # img_scale图像尺寸
-    # dict(type='RandomCrop', crop_size=crop_size, cat_max_ratio=0.75),
+        #  ratio_range=(1.0, 1.0)),
+         ratio_range=(0.5, 2.0)),  # img_scale图像尺寸
+    dict(type='RandomCrop', crop_size=crop_size, cat_max_ratio=0.75),
     dict(type='RandomFlip', prob=0.5),
     dict(type='PhotoMetricDistortion'),
     dict(type='Normalize', **img_norm_cfg),
@@ -45,8 +45,8 @@ data = dict(
     train=dict(
         type=dataset_type,
         data_root=data_root,
-        img_dir='images/training',  # 训练图像路径
-        ann_dir='annotations/training',  # 训练mask路径
+        img_dir='images/train_val',  # 训练图像路径
+        ann_dir='annotations/train_val',  # 训练mask路径
         pipeline=train_pipeline),
     val=dict(
         type=dataset_type,

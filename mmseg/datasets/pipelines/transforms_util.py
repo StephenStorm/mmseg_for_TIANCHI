@@ -29,8 +29,8 @@ client.use(client_middleware)
 
 
 # 固定随机数种子
-# np.random.seed(444)
-# random.seed(444)
+np.random.seed(444)
+random.seed(444)
 
 
 
