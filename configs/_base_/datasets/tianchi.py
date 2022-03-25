@@ -1,7 +1,7 @@
 # dataset settings
 dataset_type = 'TianchiDataset'  # 上一步中你定义的数据集的名字
 # data_root = 'data/tianchi_aug'  # 数据集存储路径
-data_root = '/opt/tiger/workspace/tianchi2022/data/new_tianchi_data'
+data_root = 'data/new_tianchi_data'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)  # 数据集的均值和标准差，空引用默认的，也可以网上搜代码计算
 crop_size = (768, 768)  # 数据增强时裁剪的大小
